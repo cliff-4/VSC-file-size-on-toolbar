@@ -1,4 +1,4 @@
-# file-size-on-toolbar README
+# File Size on Toolbar
 
 A VS Code Extension to display text file sizes on the toolbar below because I am fed-up of VS Code not including it in the main app.
 
@@ -34,7 +34,7 @@ None as of yet. It a simple application lol.
 
 Will add more as I progress through it more.
 
-### 1.0.0
+### 1.0
 
 Release!
 
