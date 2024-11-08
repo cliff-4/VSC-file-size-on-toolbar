@@ -34,7 +34,11 @@ None as of yet. It a simple application lol.
 
 Will add more as I progress through it more.
 
-### 1.0
+### 1.0.1
+
+Added Extension Icon
+
+### 1.0.0
 
 Release!
 
