@@ -36,15 +36,50 @@ function getSize(s: number): string {
     return "TooManyB";
 }
 
-export function activate(context: vscode.ExtensionContext) {
-    vscode.window.showInformationMessage(
-        '"file-size-on-toolbar" is now active'
-    );
-
-    let subObj = vscode.window.onDidChangeActiveTextEditor(async (editor) => {
+function handleOnFocusTitled(sizeView: vscode.StatusBarItem) {
+    return async () => {
+        debug(`handleOnFocus triggered`);
+        let editor = vscode.window.activeTextEditor;
         if (editor === undefined) {
+            sizeView.text = "";
             return;
         }
+        if (editor.document.isUntitled) {
+            sizeView.text = getSize(editor?.document.getText().length);
+            return;
+        }
+        debug(`Editor defined`);
+        let sizeStr = getSize(await getFileSizeBytes(editor.document.fileName));
+        debug(`Size of ${editor.document.fileName}: ${sizeStr}`);
+        sizeView.text = sizeStr;
+    };
+}
+
+function handleOnFocusUntitled(sizeView: vscode.StatusBarItem) {
+    return async () => {
+        debug(`handleOnFocus triggered`);
+        let editor = vscode.window.activeTextEditor;
+        if (editor === undefined) {
+            sizeView.text = "";
+            return;
+        }
+        if (!editor.document.isUntitled) {
+            return;
+        }
+        debug(`Editor defined`);
+        let sizeStr = getSize(editor.document.getText().length);
+        debug(`Size of ${editor.document.fileName}: ${sizeStr}`);
+        sizeView.text = sizeStr;
+    };
+}
+
+const subscribedEvents = [
+    vscode.workspace.onDidSaveTextDocument,
+    vscode.workspace.onDidSaveNotebookDocument,
+    vscode.window.onDidChangeActiveTextEditor,
+    vscode.window.onDidChangeActiveNotebookEditor,
+];
+
 export async function activate(context: vscode.ExtensionContext) {
     debug("Active");
     debug(
@@ -53,8 +88,20 @@ export async function activate(context: vscode.ExtensionContext) {
         } events\n- ${subscribedEvents.map((func) => func.name).join("\n- ")}`
     );
 
-    context.subscriptions.push(disposable, subObj);
+    let sizeView = vscode.window.createStatusBarItem(2, 4);
+    sizeView.tooltip = "File Size Information";
+    sizeView.show();
+    await handleOnFocusTitled(sizeView)();
+
+    context.subscriptions.push(
+        ...subscribedEvents.map((func) => func(handleOnFocusTitled(sizeView)))
+    );
+
+    context.subscriptions.push(
+        vscode.workspace.onDidChangeTextDocument(
+            handleOnFocusUntitled(sizeView)
+        )
+    );
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {}
