@@ -10,8 +10,7 @@
         "Other"
     ],
     "activationEvents": [
-        "onEditSession:file",
-        "onStartupFinished"
+        "*"
     ],
     "main": "./dist/extension.js",
     "contributes": {
