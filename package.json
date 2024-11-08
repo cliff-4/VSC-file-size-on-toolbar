@@ -1,12 +1,14 @@
 {
     "name": "file-size-on-toolbar",
     "displayName": "File Size on Toolbar",
+    "description": "",
+    "icon": "images/icon.png",
+    "version": "1.0.0",
     "repository": {
         "type": "git",
         "url": "https://github.com/cliff-4/VSC-file-size-on-toolbar.git"
     },
-    "description": "",
-    "version": "0.0.1",
+    "publisher": "cliff-4",
     "engines": {
         "vscode": "^1.95.0"
     },
