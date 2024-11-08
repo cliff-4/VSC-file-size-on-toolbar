@@ -1,6 +1,10 @@
 {
     "name": "file-size-on-toolbar",
     "displayName": "File Size on Toolbar",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/cliff-4/VSC-file-size-on-toolbar.git"
+    },
     "description": "",
     "version": "0.0.1",
     "engines": {
@@ -10,16 +14,11 @@
         "Other"
     ],
     "activationEvents": [
-        "*"
+        "onStartupFinished"
     ],
     "main": "./dist/extension.js",
     "contributes": {
-        "commands": [
-            {
-                "command": "file-size-on-toolbar.helloWorld",
-                "title": "Hello World"
-            }
-        ]
+
     },
     "scripts": {
         "vscode:prepublish": "npm run package",

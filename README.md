@@ -12,7 +12,7 @@ A VS Code Extension to display text file sizes on the toolbar below because I am
 
 For example if there is an image subfolder under your extension project workspace:
 
-\!\[feature X\]\(images/preview.png\)
+![Preview](images/preview.png)
 
 > This extension does not work with images, binaries, blobs and other file types. Support may come in the future. [Open a PR if you want it sooner](https://github.com/cliff-4/VSC-file-size-on-toolbar).
 
