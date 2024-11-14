@@ -19,7 +19,28 @@
         "onStartupFinished"
     ],
     "main": "./dist/extension.js",
-    "contributes": {},
+    "contributes": {
+        "configuration": {
+            "title": "File Size on Toolbar",
+            "properties": {
+                "file-size-on-toolbar.applyOnText": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Track file size for text files."
+                },
+                "file-size-on-toolbar.applyOnNotebooks": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Track file size for notebooks."
+                },
+                "file-size-on-toolbar.applyOnUntitled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Track file size for unsaved files."
+                }
+            }
+        }
+    },
     "scripts": {
         "vscode:prepublish": "npm run package",
         "compile": "npm run check-types && npm run lint && node esbuild.js",
