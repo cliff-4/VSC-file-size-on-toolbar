@@ -1,0 +1,19 @@
+name: Run basic tests
+
+on:
+    push:
+        branches: [master, main, dev]
+    pull_request:
+        branches: [master, main, dev]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: 20
+            - run: npm ci
+            - run: npm run test
