@@ -9,7 +9,7 @@ async function getFileSizeBytes(uri: vscode.Uri): Promise<number> {
     return (await vscode.workspace.fs.readFile(uri)).length;
 }
 
-function bytesToReadableString(s: number): string {
+export function bytesToReadableString(s: number): string {
     let x = 1024;
     if (s < x) {
         return (Math.round(100 * s) / 100).toString() + "B";
